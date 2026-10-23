@@ -1,0 +1,9 @@
+---
+let mounted = false;
+
+if (typeof window !== 'undefined') {
+  mounted = true;
+}
+---
+
+{mounted ? <slot /> : null}

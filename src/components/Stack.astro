@@ -1,0 +1,98 @@
+---
+import "tailwindcss/tailwind.css";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/pagination";
+
+import Docker from "./icons/Docker.astro"
+import Html from "./icons/Html.astro"
+import Css3 from "./icons/Css3.astro"
+import Javascript from "./icons/Javascript.astro"
+import AstroIco from "./icons/AstroIco.astro"
+import Mysql from "./icons/Mysql.astro"
+import Csharp from "./icons/Csharp.astro"
+
+const logos = [
+  { imagen: Html, nombre: "HTML" },
+  { imagen: Css3, nombre: "CSS3" },
+  { imagen: Javascript, nombre: "JavaScript" },
+  { imagen: Mysql, nombre: "MySql" },
+  { imagen: Csharp, nombre: "CSharp" },
+  { imagen: Docker, nombre: "Docker" },
+  { imagen: AstroIco, nombre: "Astro" },
+];
+---
+
+<div class="relative w-full md:w-3/4 mx-auto">
+  <div id="swiper-logos" class="swiper overflow-hidden">
+    <div class="swiper-wrapper">
+      {logos.map((logo, index) => (
+        <div class="swiper-slide flex justify-center items-center p-2" data-key={index}>
+          <div class="relative group p-2 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center transition-all duration-300 hover:scale-110">
+
+            <!-- Icono -->
+            {typeof logo.imagen === "string" ? (
+              <img src={logo.imagen} alt={logo.nombre} class="relative w-full h-full object-contain rounded-full" />
+            ) : (
+              <logo.imagen class="relative w-3/5 h-3/5 object-contain" />
+            )}
+
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="pagination flex justify-center space-x-2 mt-4"></div>
+</div>
+
+<script>
+  import Swiper from "swiper";
+  import { Autoplay } from "swiper/modules";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    new Swiper("#swiper-logos", {
+      modules: [Autoplay],
+      direction: "horizontal",
+      slidesPerView: "auto", // Ajuste automático para la cantidad de logos visibles
+      centeredSlides: true, // Siempre centrado
+      spaceBetween: 0,
+      loop: true,
+      autoplay: {
+        delay: 0, // Sin pausas
+        disableOnInteraction: false,
+      },
+      speed: 5000, // Movimiento continuo más suave
+      breakpoints: {
+        // En dispositivos pequeños (móvil), mostrar 2 logos
+        320: {
+          slidesPerView: 3,
+        },
+        // En tablet, mostrar 3 logos
+        640: {
+          slidesPerView: 3,
+        },
+        // En escritorio (pantallas grandes) mostrar 5 logos
+        1024: {
+          slidesPerView: 5,
+        },
+      },
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+---
+
+---
+
+<div
+    id="modal"
+    class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center"
+>
+    <div class="relative w-auto h-auto max-w-full max-h-full overflow-auto">
+        <!-- Contenedor de la animación -->
+        <div
+            id="modalContent"
+            class="opacity-0 transition-opacity duration-500"
+        >
+            <!-- Botón de cierre ahora dentro del contenedor animado -->
+            <button
+                id="closeModalButton"
+                class="absolute top-2 right-2 bg-black opacity-60 hover:opacity-80 text-white p-1 rounded-full shadow-lg text-sm sm:text-base md:text-lg lg:text-xl transition-opacity"
+            >
+                ✖
+            </button>
+
+            <!-- Imagen sin clases de opacidad -->
+            <img
+                id="modalImage"
+                src=""
+                alt="Certificado"
+                class="object-contain max-w-full w-auto h-auto mx-auto max-h-96 sm:max-h-[500px] lg:max-h-[800px]"
+            />
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("modal");
+        const closeButton = document.getElementById("closeModalButton");
+        const modalImage = document.getElementById(
+            "modalImage",
+        ) as HTMLImageElement;
+        const modalContent = document.getElementById("modalContent");
+
+        const buttons = document.querySelectorAll("[data-image]");
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const imageLink = button.getAttribute("data-image");
+
+                if (imageLink && modalImage) {
+                    // Mostrar el modal
+                    modal.classList.remove("hidden");
+                    document.body.classList.add("overflow-hidden");
+
+                    // Resetear opacidad del contenido
+                    modalContent.classList.add("opacity-0");
+
+                    // Asignar la nueva imagen
+                    modalImage.src = imageLink;
+
+                    // Configurar el evento onload después de asignar src
+                    modalImage.onload = () => {
+                        // Ajustar tamaño según orientación
+                        if (
+                            modalImage.naturalHeight > modalImage.naturalWidth
+                        ) {
+                            modalImage.classList.add("max-h-[700px]");
+                            modalImage.classList.remove(
+                                "max-h-96",
+                                "sm:max-h-[500px]",
+                            );
+                        } else {
+                            modalImage.classList.add("max-h-96");
+                            modalImage.classList.remove(
+                                "max-h-[700px]",
+                                "sm:max-h-[500px]",
+                            );
+                        }
+
+                        // Activar animación de opacidad
+                        modalContent.classList.remove("opacity-0");
+                        modalContent.classList.add("opacity-100");
+                    };
+                }
+            });
+        });
+
+        // Cerrar modal
+        const closeModal = () => {
+            modal.classList.add("hidden");
+            document.body.classList.remove("overflow-hidden");
+            modalContent.classList.add("opacity-0");
+            modalContent.classList.remove("opacity-100");
+        };
+
+        closeButton?.addEventListener("click", closeModal);
+        modal.addEventListener(
+            "click",
+            (e) => e.target === modal && closeModal(),
+        );
+        document.addEventListener(
+            "keydown",
+            (e) => e.key === "Escape" && closeModal(),
+        );
+    });
+</script>

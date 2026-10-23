@@ -1,0 +1,16 @@
+---
+import Linkedin from "./icons/Linkedin.astro";
+---
+
+<!-- Badge grande -->
+<span class="relative inline-flex overflow-hidden rounded-full p-[1px]">
+  <span
+    class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,rgb(147,51,234)_0%,rgb(75,0,130)_50%,rgb(147,51,234)_100%)]"
+  ></span>
+  <div
+    class="inline-flex items-center justify-center min-w-[150px] px-8 py-2 text-sm text-purple-900 bg-purple-200 rounded-full cursor-pointer dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap"
+  >
+    <h4>Disponible para trabajar</h4>
+    <Linkedin class="ml-1 w-6 h-6 flex-shrink-0" />
+  </div>
+</span>

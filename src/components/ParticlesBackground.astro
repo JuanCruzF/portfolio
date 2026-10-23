@@ -1,0 +1,95 @@
+---
+---
+
+<!-- Contenedor del fondo -->
+<div
+  id="particles-container"
+  class="absolute top-0 left-0 w-full h-full -z-10 bg-transparent sm:fixed"
+>
+</div>
+
+<script>
+  const initParticles = () => {
+    const container = document.getElementById("particles-container");
+
+    //@ts-ignore
+    window.tsParticles?.load("particles-container", {
+      fullScreen: { enable: false },
+      particles: {
+        number: { value: 200 }, // Aumentar más partículas para un cielo más denso
+        color: {
+          value: [
+            "#ffffff",
+            "#b0c4de",
+            "#d0e0f0",
+            "#a8c0ff",
+            "#ccdfff",
+            "#f0f8ff",
+          ], // Variación de colores para el cielo
+        },
+        opacity: {
+          value: 0.5, // Aumentar la opacidad para dar más brillo
+          random: true, // Hacer las estrellas más sutiles con opacidad aleatoria
+          animation: {
+            enable: true,
+            speed: 0.5,
+            minimumValue: 0.15,
+            sync: false,
+          }, // Ajuste en la animación para que el brillo varíe más suavemente
+        },
+        size: {
+          value: 2, // Aumentar el tamaño de las estrellas para que sean más visibles y brillantes
+          random: true, // Variación de tamaño para las estrellas
+          animation: { enable: true, speed: 0.2, minimumValue: 2 },
+        },
+        move: {
+          enable: true,
+          speed: 0.1, // Movimiento más lento
+          direction: "none",
+          random: true, // Movimiento aleatorio de las estrellas
+          straight: false,
+        },
+        twinkle: {
+          particles: {
+            enable: true,
+            frequency: 0.1, // Hacer parpadeo más frecuente para dar más brillo
+            opacity: 1, // Mayor opacidad en el parpadeo para hacer las estrellas más brillantes
+          },
+        },
+        shadow: {
+          enable: true,
+          color: "#ffffff", // Sutil resplandor blanco alrededor de algunas estrellas
+          blur: 10, // Aumentar el desenfoque para dar más brillo
+        },
+      },
+      interactivity: { events: { resize: false } },
+      detectRetina: false,
+      responsive: [
+        {
+          breakpoint: 768, // En dispositivos pequeños, menos partículas
+          options: {
+            particles: { number: { value: 100 } },
+          },
+        },
+      ],
+    });
+
+    // Evitar que el canvas se mueva o cambie con el scroll
+    const fixCanvas = () => {
+      const canvas = container.querySelector("canvas");
+      if (canvas) {
+        canvas.style.position = "absolute";
+        canvas.style.top = "0";
+        canvas.style.left = "0";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+      }
+    };
+
+    setTimeout(fixCanvas, 500);
+  };
+
+  // Inicialización segura
+  if (document.readyState === "complete") initParticles();
+  else document.addEventListener("DOMContentLoaded", initParticles);
+</script>

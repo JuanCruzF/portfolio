@@ -1,0 +1,280 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import TitleSection from "../components/TitleSection.astro";
+import CodeIcon from "../components/icons/Code.astro";
+import ProjectsIco from "../components/icons/ProjectsIco.astro";
+import Study from "../components/icons/Study.astro";
+import ProfileCheck from "../components/icons/ProfileCheck.astro";
+import Projects from "../components/Projects.astro";
+import Studies from "../components/Studies.astro";
+import AboutMe from "../components/AboutMe.astro";
+import Stack from "../components/Stack.astro";
+import ParticlesBackground from "../components/ParticlesBackground.astro";
+---
+
+<Layout
+	title="Porfolio de Juan Cruz Fucile - Desarrollador Web"
+	description="Con la aspiración a cada día mejorar y aprender."
+>
+	<!-- Loading Screen -->
+	<div
+		id="loading-screen"
+		class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+	>
+		<div class="text-center">
+			<!-- Logo/Iniciales animadas -->
+			<div class="mb-8">
+				<div
+					class="inline-block text-6xl font-bold text-white animate-pulse"
+				>
+					JCF
+				</div>
+			</div>
+
+			<!-- Texto de carga -->
+			<p class="mt-6 text-slate-300 text-lg animate-bounce">
+				Cargando portfolio...
+			</p>
+
+			<!-- Barra de progreso -->
+			<div
+				class="mt-6 w-64 h-1 bg-slate-700 rounded-full mx-auto overflow-hidden"
+			>
+				<div
+					id="progress-bar"
+					class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-300 ease-out"
+					style="width: 0%"
+				>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Contenido principal (inicialmente oculto) -->
+	<main
+		id="main-content"
+		class="relative z-10 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out"
+	>
+		<ParticlesBackground />
+		<SectionContainer id="hero">
+			<Hero />
+		</SectionContainer>
+
+		<div class="space-y-20">
+			<SectionContainer id="estudios" class="animate-fade-in-up">
+				<TitleSection>
+					<Study class="size-7" />
+					Estudios
+				</TitleSection>
+				<Studies />
+			</SectionContainer>
+
+			<SectionContainer
+				id="stack"
+				class="animate-fade-in-up animation-delay-200"
+			>
+				<TitleSection>
+					<CodeIcon class="size-7" />
+					Stack
+				</TitleSection>
+				<Stack />
+			</SectionContainer>
+
+			<SectionContainer
+				id="proyectos"
+				class="animate-fade-in-up animation-delay-400"
+			>
+				<TitleSection>
+					<ProjectsIco class="size-7" />
+					Proyectos
+				</TitleSection>
+				<Projects />
+			</SectionContainer>
+
+			<SectionContainer
+				id="sobre-mi"
+				class="animate-fade-in-up animation-delay-600"
+			>
+				<TitleSection>
+					<ProfileCheck class="size-8" />
+					Sobre mí
+				</TitleSection>
+				<AboutMe />
+			</SectionContainer>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	/* Spinner personalizado */
+	.spinner-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+	}
+
+	.spinner {
+		width: 60px;
+		height: 60px;
+		border: 4px solid #475569;
+		border-top: 4px solid #3b82f6;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Animaciones personalizadas */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.5;
+		}
+	}
+
+	@keyframes bounce {
+		0%,
+		20%,
+		53%,
+		80%,
+		100% {
+			transform: translate3d(0, 0, 0);
+		}
+		40%,
+		43% {
+			transform: translate3d(0, -8px, 0);
+		}
+		70% {
+			transform: translate3d(0, -4px, 0);
+		}
+		90% {
+			transform: translate3d(0, -2px, 0);
+		}
+	}
+
+	.animate-fade-in-up {
+		animation: fadeInUp 0.8s ease-out forwards;
+		opacity: 0;
+	}
+
+	.animate-pulse {
+		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	}
+
+	.animate-bounce {
+		animation: bounce 1s infinite;
+	}
+
+	.animation-delay-200 {
+		animation-delay: 0.2s;
+	}
+
+	.animation-delay-400 {
+		animation-delay: 0.4s;
+	}
+
+	.animation-delay-600 {
+		animation-delay: 0.6s;
+	}
+
+	/* Smooth scroll */
+	html {
+		scroll-behavior: smooth;
+	}
+</style>
+
+<script>
+	// Loading logic
+	document.addEventListener("DOMContentLoaded", function () {
+		const loadingScreen = document.getElementById("loading-screen");
+		const mainContent = document.getElementById("main-content");
+		const progressBar = document.getElementById("progress-bar");
+
+		let progress = 0;
+		const duration = 2000; // 2 segundos de carga mínima
+		const interval = 50; // Actualizar cada 50ms
+		const increment = (interval / duration) * 100;
+
+		// Simular progreso de carga
+		const progressInterval = setInterval(() => {
+			progress += increment + Math.random() * 5; // Añadir algo de variación
+
+			if (progress > 100) {
+				progress = 100;
+			}
+
+			if (progressBar) {
+				progressBar.style.width = progress + "%";
+			}
+
+			if (progress >= 100) {
+				clearInterval(progressInterval);
+
+				// Esperar un poco más antes de mostrar el contenido
+				setTimeout(() => {
+					// Ocultar loading screen
+					if (loadingScreen) {
+						loadingScreen.style.opacity = "0";
+						loadingScreen.style.transform = "scale(0.95)";
+						loadingScreen.style.transition = "all 0.5s ease-out";
+
+						setTimeout(() => {
+							loadingScreen.style.display = "none";
+						}, 500);
+					}
+
+					// Mostrar contenido principal
+					if (mainContent) {
+						mainContent.style.opacity = "1";
+						mainContent.style.transform = "translateY(0)";
+					}
+
+					// Activar animaciones de las secciones
+					const sections = document.querySelectorAll(
+						".animate-fade-in-up",
+					);
+					sections.forEach((section, index) => {
+						setTimeout(() => {
+							section.style.animationPlayState = "running";
+						}, index * 200);
+					});
+				}, 300);
+			}
+		}, interval);
+
+		// También verificar cuando todas las imágenes estén cargadas
+		window.addEventListener("load", () => {
+			// Si el progreso no ha llegado al 100%, acelerarlo
+			if (progress < 100) {
+				progress = 100;
+				if (progressBar) {
+					progressBar.style.width = "100%";
+				}
+			}
+		});
+	});
+</script>
