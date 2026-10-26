@@ -1,12 +1,19 @@
 // data/projects.js
 export const projects = [
   {
-    imagen: "/projects/booksense.webp",
-    titulo: "BookSense",
-    descripcion: "Se realizó con una estructura de microservicios, su objetivo: organización de lecturas.",
-    tecnologias: ["Java", "Spring Boot", "MariaDB"],
-    link: "https://booksense.jc-dev.info",
+    imagen: "/projects/viedma.webp",
+    titulo: "Viedma",
+    descripcion: "Tienda online con panel de administración, manejo de stock, integración con Mercado Pago, entre otras funcionalidades.",
+    tecnologias: ["TypeScript", "Next.js", "Medusa", "Jest", "Cloudflare"],
+    link: "https://viedmaco.com.ar",
     destacado: true
+  },
+  {
+    imagen: "/projects/bahiacars.webp",
+    titulo: "BahiaCars",
+    descripcion: "Sitio web y panel de gestión para una concesionaria: Gestión de vehículos y sincronización con frontend.",
+    tecnologias: ["TypeScript", "Astro", "Preact", "Hono", "Cloudflare Workers", "D1"],
+    link: "https://bahiacars.com.ar",
   },
   {
     imagen: "/projects/anotacionespersonales.webp",
