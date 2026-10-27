@@ -24,15 +24,15 @@ export const projects = [
   },
   {
     imagen: "/projects/bienesraices.webp",
-    titulo: "Landing Page - Bienes Raices",
+    titulo: "Landing Page - Bienes Raíces",
     descripcion: "Proyecto con diferentes secciones, formulario de contacto, blog, etc.",
     tecnologias: ["HTML5", "CSS3"],
     link: "https://juancruzf.github.io/BienesRaices/"
   },
   {
     imagen: "/projects/busquedavehiculos.webp",
-    titulo: "Busqueda de Vehículos",
-    descripcion: "Página web simple donde a tiempo real se filtran las busquedas.",
+    titulo: "Búsqueda de Vehículos",
+    descripcion: "Página web simple donde a tiempo real se filtran las búsquedas.",
     tecnologias: ["JavaScript"],
     link: "https://juancruzf.github.io/Busquedavehiculos/",
 
